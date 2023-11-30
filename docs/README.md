@@ -38,14 +38,21 @@
     - [ ] 총 수익률을 계산한다.
       - [ ] 수익률은 소수점 둘째 자리에서 반올림한다.
 
+- ### LottoGenerator
+  - 메소드
+    - [ ] 돈을 전달 받아서 로또를 생성한다.
+    - 전달 받은 금액 검증
+      - [ ] `1000`으로 나누어 떨어지지 않는다.
+        - 위 조건에 해당하면 `IllegalArgumentException` 예외 처리한다.
+
 ---
 
 ## 어플리케이션 서비스
 ### 공용 (util)
 - ### StringValidator
-    - [ ] null 이면 `IllegalArgumentException` 예외 처리한다.
-    - [ ] 빈 문자열 이면 `IllegalArgumentException` 예외 처리한다.
-    - [ ] 문자열의 시작 또는 끝이 공백이면 `IllegalArgumentException` 예외 처리한다.
+    - [x] null 이면 `IllegalArgumentException` 예외 처리한다.
+    - [x] 빈 문자열 이면 `IllegalArgumentException` 예외 처리한다.
+    - [x] 문자열의 시작 또는 끝이 공백이면 `IllegalArgumentException` 예외 처리한다.
 
 ### 비즈니스 (Handler)
 - ### InputHandler
