@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class InputHandler {
-    private final int LOTTO_PRICE = 1_000;
+    static final int LOTTO_PRICE = 1_000;
     private final Pattern INTEGER_PATTERN = Pattern.compile("^\\d+$");
 
     private InputHandler() {
@@ -21,20 +21,20 @@ public final class InputHandler {
         StringValidator.isNotEmpty(inputMoney);
         StringValidator.hasNotSurroundingWhiteSpace(inputMoney);
         final int money =  parseInputAsInteger(inputMoney);
-        return calculateNumberOfLotteries(money);
+        return calculateCountOfLotteries (money);
     }
 
     private int parseInputAsInteger(String input) {
         Matcher matcher = INTEGER_PATTERN.matcher(input);
         if (!matcher.matches()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_INTEGER.getMessage());
         }
         return Integer.parseInt(input);
     }
 
-    private int calculateNumberOfLotteries(int money) {
+    private int calculateCountOfLotteries (int money) {
         if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_DIVISIBLE_BY_LOTTO_PRICE.getMessage());
         }
         return money / LOTTO_PRICE;
     }
