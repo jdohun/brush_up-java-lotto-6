@@ -6,7 +6,7 @@ public final class InputView {
     private InputView() {
     }
 
-    public static final InputView getInstance() {
+    public static InputView getInstance() {
         return Holder.INPUT_VIEW;
     }
 
