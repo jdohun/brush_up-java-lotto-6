@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class AutoLottoGenerator {
-    static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
 
     private AutoLottoGenerator() {
     }
@@ -34,9 +34,6 @@ public final class AutoLottoGenerator {
     }
 
     private int calculateCountOfLotteries (int money) {
-        if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(AutoLottoGeneratorErrorMessage.ERROR_NOT_DIVISIBLE_BY_LOTTO_PRICE.getMessage());
-        }
         return money / LOTTO_PRICE;
     }
 
