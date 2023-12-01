@@ -1,6 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.model.AutoLottoGenerator;
+import camp.nextstep.edu.missionutils.Console;
+import lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator;
 import lotto.domain.model.Lotteries;
 import lotto.handler.InputHandler;
 import lotto.view.inputView.InputView;
@@ -15,16 +16,27 @@ public class LottoController {
     private final AutoLottoGenerator LOTTO_GENERATOR = AutoLottoGenerator.getInstance();
 
     public void run() {
-        buyLotteries();
+        try {
+            final int money = getMoney();
+            Lotteries usersLotteries = buyLotteries(money);
+            OUTPUT_VIEW.showCountOfLotteries(usersLotteries.getSize());
+//            OUTPUT_VIEW.showLotteries(usersLotteries);
+
+
+        } finally {
+            Console.close();
+        }
     }
 
-    private Lotteries buyLotteries() {
-        final int count = get(() -> INPUT_HANDLER.inputMoneyToCountOfLotteries(INPUT_VIEW.inputMoney()));
-        OUTPUT_VIEW.showCountOfLotteries(count);
-        return LOTTO_GENERATOR.createLotteries(count);
+    private int getMoney() {
+        return repeatUntilNoException(() -> INPUT_HANDLER.parseInputMoneyAsInteger(INPUT_VIEW.inputMoney()));
     }
 
-    private <T> T get(Supplier<T> supplier) {
+    private Lotteries buyLotteries(final int money) {
+        return repeatUntilNoException(() -> LOTTO_GENERATOR.createLotteries(money));
+    }
+
+    private <T> T repeatUntilNoException(Supplier<T> supplier) {
         while (true) try {
             return supplier.get();
         } catch (IllegalArgumentException e) {
