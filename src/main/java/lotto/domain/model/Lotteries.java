@@ -1,5 +1,7 @@
 package lotto.domain.model;
 
+import lotto.domain.model.lotto.Lotto;
+
 import java.util.List;
 
 public class Lotteries {
