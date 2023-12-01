@@ -1,6 +1,7 @@
 package lotto.domain.model.lottoNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +26,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> from(List<Integer> numbers) {
+        Collections.sort(numbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int number : numbers) {
