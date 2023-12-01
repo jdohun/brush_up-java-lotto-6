@@ -5,7 +5,7 @@
 - ### LottoNumber
   - 멤버
     - `int lottoNumber`
-    - `boolean bonus`
+    - `boolean isBonus`
 
   - 메소드
     - 생성 전 검증
@@ -13,24 +13,50 @@
         - 검증에 실패하면 `IllegalArgumentException` 예외 처리한다.
       - [x] 정수 리스트를 전달 받아 로또 번호 리스트를 반환한다.
       - [x] 보너스 번호 여부를 반환한다.
-      - [ ] 동일 숫자 보유 여부를 반환한다.
 
   - 오버라이드 메소드
-    - [x] equals : 같은 숫자인지 판별한다.
+    - [x] equals : number 값이 동일한지 판별한다.
     - [x] hashCode : number 값에 따라 독립된 해시 값을 반환한다.
-
 
 - ### Lotto
   - 멤버
-    - `List<LottoNumber> lottoNumbers`
+    - `List<LottoNumber> numbers`
 
   - 메소드
     - 생성 전 검증
-      - [ ] 전달된 단일 숫자의 개수가 6개이다.
-      - [ ] 전달된 단일 숫자 중에 중복되는 숫자가 존재하지 않는다.
+      - [x] 전달된 단일 숫자의 개수가 6개이다.
+      - [x] 전달된 단일 숫자 중에 중복되는 숫자가 존재하지 않는다.
         - 검증에 실패하면 `IllegalArgumentException` 예외 처리한다.
-    - [ ] 일치하는 번호의 갯수를 반환한다.
-    - [ ] 타켓 번호(보너스 번호)의 포함 여부를 판별한다.
+    - [x] 전달 받은 Lotto 와 일치하는 번호의 갯수를 반환한다.
+    - [x] 보너스 번호의 포함 여부를 판별한다.
+
+- ### AutoLottoGenerator
+  - 메소드
+    - [x] 입력한 수량만큼 로또를 생성한다.
+
+- ### WinningResult
+  - 멤버
+    - `matchingNumberCount`
+    - `hasBonusNumber`
+    - `prize`
+
+  - 메소드
+    - [x] 일치하는 번호 개수를 반환한다.
+    - [x] 보너스 번호의 일치 여부를 반환한다.
+    - [x] 상금을 반환한다.
+    - [x] 주어진 번호 개수와 보너스 번호 일치 여부에 따라 당첨 결과를 반환한다.
+
+- ### WinningLotto
+  - 멤버
+    - `Lotto winningLotto`
+    - `LottoNumber bonusNumber`
+
+  - 메소드
+    - 생성 전 검증
+      - [ ] 전달된 단일 로또 번호가 보너스 번호이다.
+      - [ ] 전달된 로또에 보너스 번호와 일치하는 LottoNumber 가 존재하지 않는다.
+        - 검증에 실패하면 `IllegalArgumentException` 예외 처리한다.
+    - [ ] 전달 받은 Lotto 의 당첨 결과를 반환한다.
 
 
 - ### Lotteries
@@ -41,10 +67,6 @@
     - [ ] 당첨 통계를 계산한다.
     - [ ] 총 수익률을 계산한다.
       - [ ] 수익률은 소수점 둘째 자리에서 반올림한다.
-
-- ### LottoGenerator
-  - 메소드
-    - [x] 입력한 수량만큼 로또를 생성한다.
 
 ---
 
