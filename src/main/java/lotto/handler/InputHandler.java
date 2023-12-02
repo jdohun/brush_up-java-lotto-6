@@ -1,6 +1,6 @@
 package lotto.handler;
 
-import lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator;
+import lotto.domain.generator.AutoLottoGenerator;
 import lotto.util.stringValidator.StringValidator;
 
 import java.util.ArrayList;

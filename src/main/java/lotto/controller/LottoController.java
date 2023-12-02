@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator;
+import lotto.domain.generator.AutoLottoGenerator;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
