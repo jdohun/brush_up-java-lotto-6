@@ -19,9 +19,7 @@ public class LottoController {
         try {
             final int money = getMoney();
             Lotteries usersLotteries = buyLotteries(money);
-            OUTPUT_VIEW.showCountOfLotteries(usersLotteries.getSize());
-//            OUTPUT_VIEW.showLotteries(usersLotteries);
-
+            OUTPUT_VIEW.showLotteriesInfo(usersLotteries);
 
         } finally {
             Console.close();
@@ -33,7 +31,7 @@ public class LottoController {
     }
 
     private Lotteries buyLotteries(final int money) {
-        return repeatUntilNoException(() -> LOTTO_GENERATOR.createLotteries(money));
+        return LOTTO_GENERATOR.createLotteries(money);
     }
 
     private <T> T repeatUntilNoException(Supplier<T> supplier) {

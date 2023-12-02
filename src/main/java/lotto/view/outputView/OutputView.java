@@ -1,5 +1,10 @@
 package lotto.view.outputView;
 
+import lotto.domain.model.Lotteries;
+import lotto.dto.LottoDto;
+
+import java.util.List;
+
 public final class OutputView {
     private OutputView() {
     }
@@ -8,7 +13,19 @@ public final class OutputView {
         return Holder.OUTPUT_VIEW;
     }
 
-    public void showCountOfLotteries(int count) {
+    public void showLotteriesInfo(Lotteries lotteries) {
+        System.out.println();
+        showCountOfLotteries(lotteries.getSize());
+        showLotteriesDetail(lotteries.toDtos());
+    }
+
+    private void showLotteriesDetail(List<LottoDto> lottoDtos) {
+        for (LottoDto lottoDto : lottoDtos) {
+            System.out.println(lottoDto.numbers());
+        }
+    }
+
+    private void showCountOfLotteries(int count) {
         System.out.println(OutputMessage.NUMBER_OF_BOUGHT_LOTTERIES_FORMAT.getMessage(count));
     }
 
