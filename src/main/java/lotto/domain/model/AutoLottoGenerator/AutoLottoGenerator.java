@@ -1,7 +1,7 @@
 package lotto.domain.model.AutoLottoGenerator;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import lotto.domain.model.Lotteries;
+import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
 
@@ -26,7 +26,7 @@ public final class AutoLottoGenerator {
             lottoList.add(this.generate());
         }
 
-        return Lotteries.from(lottoList);
+        return new Lotteries(lottoList);
     }
 
     private Lotto generate() {
