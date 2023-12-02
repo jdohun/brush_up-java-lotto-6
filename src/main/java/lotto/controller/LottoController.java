@@ -2,11 +2,15 @@ package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator;
-import lotto.domain.model.Lotteries;
+import lotto.domain.model.lotteries.Lotteries;
+import lotto.domain.model.lotto.Lotto;
+import lotto.domain.model.lottoNumber.LottoNumber;
+import lotto.domain.model.winningLotto.WinningLotto;
 import lotto.handler.InputHandler;
 import lotto.view.inputView.InputView;
 import lotto.view.outputView.OutputView;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class LottoController {
@@ -21,17 +25,35 @@ public class LottoController {
             Lotteries usersLotteries = buyLotteries(money);
             OUTPUT_VIEW.showLotteriesInfo(usersLotteries);
 
+            WinningLotto winningLotto = defineWinningLotto();
+
+
         } finally {
             Console.close();
         }
     }
 
     private int getMoney() {
-        return repeatUntilNoException(() -> INPUT_HANDLER.parseInputMoneyAsInteger(INPUT_VIEW.inputMoney()));
+        return repeatUntilNoException(() -> INPUT_HANDLER.parseInputMoney(INPUT_VIEW.inputMoney()));
     }
 
     private Lotteries buyLotteries(final int money) {
         return LOTTO_GENERATOR.createLotteries(money);
+    }
+
+    private WinningLotto defineWinningLotto() {
+        final Lotto winningNumbers = repeatUntilNoException(() -> announceWinningNumbers());
+        return repeatUntilNoException(() -> new WinningLotto(winningNumbers, repeatUntilNoException(() -> announceBonusNumber())));
+    }
+
+    private Lotto announceWinningNumbers() {
+        List<Integer> WinningNumbers = repeatUntilNoException(() -> INPUT_HANDLER.parseWinningNumbers(INPUT_VIEW.inputWinningNumbers()));
+        return new Lotto(WinningNumbers);
+    }
+
+    private LottoNumber announceBonusNumber() {
+        int inputBonusNumber = repeatUntilNoException(() -> INPUT_HANDLER.parseBonusNumber(INPUT_VIEW.inputBonusNumber()));
+        return new LottoNumber(inputBonusNumber, true);
     }
 
     private <T> T repeatUntilNoException(Supplier<T> supplier) {
