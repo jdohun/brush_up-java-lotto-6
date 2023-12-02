@@ -1,5 +1,7 @@
 package lotto.domain.model.lottoNumber;
 
+import lotto.dto.LottoNumberDto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +10,6 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int START_OF_RANGE = 1;
     public static final int END_OF_RANGE = 45;
-    public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final int lottoNumber;
     private final boolean isBonus;
@@ -52,6 +53,10 @@ public class LottoNumber {
 
     public boolean isBonus() {
         return isBonus;
+    }
+
+    public LottoNumberDto toDto() {
+        return new LottoNumberDto(lottoNumber, isBonus);
     }
 
     @Override
