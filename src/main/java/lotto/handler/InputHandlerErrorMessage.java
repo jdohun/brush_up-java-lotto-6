@@ -1,6 +1,6 @@
 package lotto.handler;
 
-import static lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator.LOTTO_PRICE;
+import static lotto.domain.generator.AutoLottoGenerator.LOTTO_PRICE;
 import static lotto.util.ErrorMessagePrefix.ERROR_MESSAGE_PREFIX;
 
 enum InputHandlerErrorMessage {

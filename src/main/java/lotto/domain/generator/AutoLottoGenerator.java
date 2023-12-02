@@ -1,4 +1,4 @@
-package lotto.domain.model.AutoLottoGenerator;
+package lotto.domain.generator;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.model.lotteries.Lotteries;
