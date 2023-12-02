@@ -3,11 +3,15 @@ package lotto.handler;
 import lotto.domain.model.AutoLottoGenerator.AutoLottoGenerator;
 import lotto.util.stringValidator.StringValidator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class InputHandler {
     private final Pattern INTEGER_PATTERN = Pattern.compile("^\\d+$");
+    private final Pattern WINNING_NUMBER_PATTERN = Pattern.compile("^\\d{1,2}(,\\d{1,2}){5}");
+    private final String WINNING_NUMBER_DELIMITER = ",";
 
     private InputHandler() {
     }
@@ -16,13 +20,17 @@ public final class InputHandler {
         return Holder.INPUT_HANDLER;
     }
 
-    public int parseInputMoneyAsInteger(final String inputMoney) {
-        StringValidator.isNotNull(inputMoney);
-        StringValidator.isNotEmpty(inputMoney);
-        StringValidator.hasNotSurroundingWhiteSpace(inputMoney);
+    public int parseInputMoney(final String inputMoney) {
+        validateInput(inputMoney);
         final int money = parseInputAsInteger(inputMoney);
         validateMoneyDivisibleByLottoPrice(money);
         return money;
+    }
+
+    private void validateInput(String input) {
+        StringValidator.isNotNull(input);
+        StringValidator.isNotEmpty(input);
+        StringValidator.hasNotSurroundingWhiteSpace(input);
     }
 
     private void validateMoneyDivisibleByLottoPrice(final int money) {
@@ -37,6 +45,31 @@ public final class InputHandler {
             throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_INTEGER.getMessage());
         }
         return Integer.parseInt(input);
+    }
+
+    public List<Integer> parseWinningNumbers(String inputWinningNumbers) {
+        validateInput(inputWinningNumbers);
+        validateWinningNumbersFormat(inputWinningNumbers);
+        String[] splitNumbers = inputWinningNumbers.split(WINNING_NUMBER_DELIMITER);
+
+        List<Integer> winningNumbers = new ArrayList<>();
+        for (String splitNumber : splitNumbers) {
+            winningNumbers.add(parseInputAsInteger(splitNumber.trim()));
+        }
+
+        return winningNumbers;
+    }
+
+    private void validateWinningNumbersFormat(String inputWinningNumbers) {
+        Matcher matcher = WINNING_NUMBER_PATTERN.matcher(inputWinningNumbers);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_INVALID_WINNING_NUMBERS_FORMAT.getMessage());
+        }
+    }
+
+    public int parseBonusNumber(String inputBonusNumber) {
+        validateInput(inputBonusNumber);
+        return parseInputAsInteger(inputBonusNumber);
     }
 
     private static final class Holder {
