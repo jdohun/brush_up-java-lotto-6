@@ -1,6 +1,6 @@
 package lotto.domain.model.lotto;
 
-import static lotto.domain.model.lottoNumber.LottoNumber.LOTTO_NUMBER_COUNT;
+import static lotto.domain.model.lotto.Lotto.LOTTO_NUMBER_COUNT;
 import static lotto.util.ErrorMessagePrefix.ERROR_MESSAGE_PREFIX;
 
 enum LottoErrorMessage {

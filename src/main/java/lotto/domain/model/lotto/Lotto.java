@@ -1,14 +1,15 @@
 package lotto.domain.model.lotto;
 
 import lotto.domain.model.lottoNumber.LottoNumber;
+import lotto.dto.LottoDto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static lotto.domain.model.lottoNumber.LottoNumber.LOTTO_NUMBER_COUNT;
-
 public class Lotto {
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -48,5 +49,13 @@ public class Lotto {
             return false;
         }
         return numbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    }
+
+    public LottoDto mapToDto() {
+        List<Integer> numbersForDto = new ArrayList<>();
+        for (LottoNumber number : numbers) {
+            numbersForDto.add(number.toDto().number());
+        }
+        return new LottoDto(numbersForDto);
     }
 }

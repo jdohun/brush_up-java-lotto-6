@@ -30,7 +30,7 @@ public final class AutoLottoGenerator {
     }
 
     private Lotto generate() {
-        return new Lotto(Randoms.pickUniqueNumbersInRange(LottoNumber.START_OF_RANGE, LottoNumber.END_OF_RANGE, LottoNumber.LOTTO_NUMBER_COUNT));
+        return new Lotto(Randoms.pickUniqueNumbersInRange(LottoNumber.START_OF_RANGE, LottoNumber.END_OF_RANGE, Lotto.LOTTO_NUMBER_COUNT));
     }
 
     private int calculateCountOfLotteries (int money) {
