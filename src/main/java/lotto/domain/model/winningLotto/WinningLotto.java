@@ -5,10 +5,7 @@ import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -45,7 +42,7 @@ public class WinningLotto {
 
         updateWinningStatistics(winningStatistics, winningResults);
 
-        return winningStatistics;
+        return Collections.unmodifiableMap(winningStatistics);
     }
 
     private List<WinningResult> calculateLotteriesWinningResults(Lotteries usersLotteries) {
