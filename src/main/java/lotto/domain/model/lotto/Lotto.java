@@ -14,7 +14,6 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        hasNoDuplicateNumbers(numbers);
         this.numbers = List.copyOf(LottoNumber.from(numbers));
     }
 
