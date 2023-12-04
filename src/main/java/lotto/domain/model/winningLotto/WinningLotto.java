@@ -39,13 +39,13 @@ public class WinningLotto {
     }
 
     public Map<WinningResult, Integer> calculateWinningStatistics(Lotteries usersLotteries) {
-        Map<WinningResult, Integer> winningResultIntegerMap = initializeWinningResultMap();
+        Map<WinningResult, Integer> winningStatistics = initializeWinningStatistics();
 
         List<WinningResult> winningResults = calculateLotteriesWinningResults(usersLotteries);
 
-        updateWinningResultMap(winningResultIntegerMap, winningResults);
+        updateWinningStatistics(winningStatistics, winningResults);
 
-        return winningResultIntegerMap;
+        return winningStatistics;
     }
 
     private List<WinningResult> calculateLotteriesWinningResults(Lotteries usersLotteries) {
@@ -61,7 +61,7 @@ public class WinningLotto {
         return WinningResult.getWinningResultBy(matchingNumberCount, hasBonusNumber);
     }
 
-    private Map<WinningResult, Integer> initializeWinningResultMap() {
+    private Map<WinningResult, Integer> initializeWinningStatistics() {
         Map<WinningResult, Integer> winningResultIntegerMap = new HashMap<>();
         for (WinningResult result : EnumSet.range(WinningResult.FIFTH_PLACE, WinningResult.FIRST_PLACE)) {
             winningResultIntegerMap.put(result, 0);
@@ -69,9 +69,9 @@ public class WinningLotto {
         return winningResultIntegerMap;
     }
 
-    private void updateWinningResultMap(Map<WinningResult, Integer> winningResultIntegerMap, List<WinningResult> winningResults) {
-        for (WinningResult winningResult : winningResults) {
-            winningResultIntegerMap.put(winningResult, winningResultIntegerMap.get(winningResult) + 1);
-        }
+    private void updateWinningStatistics(Map<WinningResult, Integer> winningResultIntegerMap, List<WinningResult> winningResults) {
+        winningResults.stream()
+                .filter(winningResult -> !winningResult.equals(WinningResult.NO_WIN))
+                .forEach(winningResult -> winningResultIntegerMap.merge(winningResult, 1, Integer::sum));
     }
 }
