@@ -1,7 +1,7 @@
 package lotto.handler;
 
 import lotto.domain.generator.AutoLottoGenerator;
-import lotto.util.stringValidator.StringValidator;
+import lotto.util.inputStringValidator.InputStringValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +28,9 @@ public final class InputHandler {
     }
 
     private void validateInput(String input) {
-        StringValidator.isNotNull(input);
-        StringValidator.isNotEmpty(input);
-        StringValidator.hasNotSurroundingWhiteSpace(input);
+        InputStringValidator.isNotNull(input);
+        InputStringValidator.isNotEmpty(input);
+        InputStringValidator.hasNotSurroundingWhiteSpace(input);
     }
 
     private void validateMoneyDivisibleByLottoPrice(final int money) {

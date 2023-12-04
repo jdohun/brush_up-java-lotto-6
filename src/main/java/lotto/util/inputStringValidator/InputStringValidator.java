@@ -1,14 +1,14 @@
-package lotto.util.stringValidator;
+package lotto.util.inputStringValidator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static lotto.util.stringValidator.StringValidatorErrorMessage.*;
+import static lotto.util.inputStringValidator.InputStringValidatorErrorMessage.*;
 
-public final class StringValidator {
+public final class InputStringValidator {
     private static final Pattern FORMAT_INVALID_STRING_HAS_SURROUNDING_WHITE_SPACE = Pattern.compile("^\\S(.*\\S)?$");
 
-    private StringValidator() {
+    private InputStringValidator() {
     }
 
     public static void isNotNull(String input) {
