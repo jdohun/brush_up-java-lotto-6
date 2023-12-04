@@ -3,6 +3,7 @@ package lotto.domain.model.lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.dto.LottoDto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,7 @@ public class Lotteries {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLotteries() {
+    public List<Lotto> getImmutableLotteries() {
         return lotteries;
     }
 }
