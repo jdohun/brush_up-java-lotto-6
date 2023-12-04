@@ -27,10 +27,11 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> from(List<Integer> numbers) {
-        Collections.sort(numbers);
+        List<Integer> copyNumbers = new ArrayList<>(numbers);
+        Collections.sort(copyNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (int number : numbers) {
+        for (int number : copyNumbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
 
