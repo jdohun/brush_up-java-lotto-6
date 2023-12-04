@@ -2,6 +2,7 @@ package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.model.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
@@ -11,6 +12,7 @@ import lotto.view.inputView.InputView;
 import lotto.view.outputView.OutputView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class LottoController {
@@ -26,8 +28,11 @@ public class LottoController {
             OUTPUT_VIEW.showLotteriesInfo(usersLotteries);
 
             WinningLotto winningLotto = defineWinningLotto();
+            Map<WinningResult, Integer> winningStatistics = winningLotto.calculateWinningStatistics(usersLotteries);
+            OUTPUT_VIEW.showWinningStatistics(winningStatistics);
 
-
+            double rateOfReturn = WinningResult.calculateRateOfReturn(money, winningStatistics);
+            OUTPUT_VIEW.showRateOfReturn(rateOfReturn);
         } finally {
             Console.close();
         }
