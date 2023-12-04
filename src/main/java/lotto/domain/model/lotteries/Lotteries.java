@@ -6,7 +6,8 @@ import lotto.dto.LottoDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.model.lotteries.LotteriesErrorMessage.*;
+import static lotto.domain.model.lotteries.LotteriesErrorMessage.ERROR_CONTAIN_NULL_ELEMENT;
+import static lotto.domain.model.lotteries.LotteriesErrorMessage.ERROR_EMPTY_LIST;
 
 public class Lotteries {
 
@@ -14,7 +15,7 @@ public class Lotteries {
 
     public Lotteries(List<Lotto> lotteries) {
         validate(lotteries);
-        this.lotteries = lotteries;
+        this.lotteries = List.copyOf(lotteries);
     }
 
     private void validate(List<Lotto> lotteries) {
@@ -45,5 +46,9 @@ public class Lotteries {
         return lotteries.stream()
                 .map(Lotto::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<Lotto> getLotteries() {
+        return lotteries;
     }
 }
