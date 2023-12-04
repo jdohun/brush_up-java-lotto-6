@@ -1,9 +1,13 @@
 package lotto.view.outputView;
 
+import lotto.domain.model.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.dto.LottoDto;
 
 import java.util.List;
+import java.util.Map;
+
+import static lotto.view.outputView.OutputMessage.*;
 
 public final class OutputView {
     private OutputView() {
@@ -27,7 +31,21 @@ public final class OutputView {
     }
 
     private void showCountOfLotteries(int count) {
-        System.out.println(OutputMessage.NUMBER_OF_BOUGHT_LOTTERIES_FORMAT.getMessage(count));
+        System.out.printf((NUMBER_OF_BOUGHT_LOTTERIES_FORMAT.getMessage()) + "%n", count);
+    }
+
+    public void showWinningStatistics(Map<WinningResult, Integer> winningResults) {
+        System.out.println();
+        System.out.println(WINNING_STATISTICS_TITLE.getMessage());
+        System.out.println(LINE_SEPARATOR_AS_HYPHEN);
+        for (Map.Entry<WinningResult, Integer> winningResult : winningResults.entrySet()) {
+            System.out.println(String.format(winningResult.getKey().getResultFormat(), winningResult.getValue()));
+        }
+
+    }
+
+    public void showRateOfReturn(double rateOfReturn) {
+        System.out.printf((RESULT_RATE_OF_RETURN_FORMAT.getMessage()) + "%n", rateOfReturn);
     }
 
     private static final class Holder {
