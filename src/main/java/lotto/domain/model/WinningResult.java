@@ -5,11 +5,11 @@ import java.util.Map;
 
 public enum WinningResult {
     NO_WIN(0, false, 0L, "해당 없음"),
-    FIFTH_PLACE(3, false, 5_000L, "%d개 일치 (%,d원) - %d개"),
-    FOURTH_PLACE(4, false, 50_000L, "%d개 일치 (%,d원) - %d개"),
-    THIRD_PLACE(5, false, 1_500_000L, "%d개 일치 (%,d원) - %d개"),
-    SECOND_PLACE(5, true, 30_000_000L, "%d개 일치, 보너스 볼 일치 (%,d원) - %d개"),
-    FIRST_PLACE(6, false, 2_000_000_000L, "%d개 일치 (%,d원) - %d개");
+    FIFTH_PLACE(3, false, 5_000L, "%d개 일치 (%,d원)"),
+    FOURTH_PLACE(4, false, 50_000L, "%d개 일치 (%,d원)"),
+    THIRD_PLACE(5, false, 1_500_000L, "%d개 일치 (%,d원)"),
+    SECOND_PLACE(5, true, 30_000_000L, "%d개 일치, 보너스 볼 일치 (%,d원)"),
+    FIRST_PLACE(6, false, 2_000_000_000L, "%d개 일치 (%,d원)");
 
     private static final int PERCENT = 100;
 

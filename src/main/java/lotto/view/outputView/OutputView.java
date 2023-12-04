@@ -37,9 +37,9 @@ public final class OutputView {
     public void showWinningStatistics(Map<WinningResult, Integer> winningResults) {
         System.out.println();
         System.out.println(WINNING_STATISTICS_TITLE.getMessage());
-        System.out.println(LINE_SEPARATOR_AS_HYPHEN);
+        System.out.println(LINE_SEPARATOR_FOR_STATISTICS.getMessage());
         for (Map.Entry<WinningResult, Integer> winningResult : winningResults.entrySet()) {
-            System.out.println(String.format(winningResult.getKey().getResultFormat(), winningResult.getValue()));
+            System.out.println(String.format(winningResult.getKey().getResultFormat()) + String.format(COUNT_OF_WINNING_FORMAT.getMessage(), winningResult.getValue()));
         }
 
     }
