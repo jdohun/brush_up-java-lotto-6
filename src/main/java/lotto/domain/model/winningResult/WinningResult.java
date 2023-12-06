@@ -1,28 +1,30 @@
-package lotto.domain.model;
+package lotto.domain.model.winningResult;
 
 import java.util.Arrays;
 import java.util.Map;
 
+import static lotto.domain.model.winningResult.WinningResultMessageFormat.*;
+
 public enum WinningResult {
-    NO_WIN(0, false, 0L, "해당 없음"),
-    FIFTH_PLACE(3, false, 5_000L, "%d개 일치 (%,d원)"),
-    FOURTH_PLACE(4, false, 50_000L, "%d개 일치 (%,d원)"),
-    THIRD_PLACE(5, false, 1_500_000L, "%d개 일치 (%,d원)"),
-    SECOND_PLACE(5, true, 30_000_000L, "%d개 일치, 보너스 볼 일치 (%,d원)"),
-    FIRST_PLACE(6, false, 2_000_000_000L, "%d개 일치 (%,d원)");
+    NO_WIN(0, false, 0L, RESULT_NONE.getMessageFormat()),
+    FIFTH_PLACE(3, false, 5_000L, RESULT_MATCH_FORMAT.getMessageFormat()),
+    FOURTH_PLACE(4, false, 50_000L, RESULT_MATCH_FORMAT.getMessageFormat()),
+    THIRD_PLACE(5, false, 1_500_000L, RESULT_MATCH_FORMAT.getMessageFormat()),
+    SECOND_PLACE(5, true, 30_000_000L, RESULT_MATCH_WITH_BONUS_FORMAT.getMessageFormat()),
+    FIRST_PLACE(6, false, 2_000_000_000L, RESULT_MATCH_FORMAT.getMessageFormat());
 
     private static final int PERCENT = 100;
 
     private final int matchingNumberCount;
     private final boolean hasBonusNumber;
     private final long prize;
-    private final String resultFormat;
+    private final String resultMessageFormat;
 
-    WinningResult(int matchingNumberCount, boolean hasBonusNumber, long prize, String resultFormat) {
+    WinningResult(int matchingNumberCount, boolean hasBonusNumber, long prize, String resultMessageFormat) {
         this.matchingNumberCount = matchingNumberCount;
         this.hasBonusNumber = hasBonusNumber;
         this.prize = prize;
-        this.resultFormat = String.format(resultFormat, matchingNumberCount, prize);
+        this.resultMessageFormat = String.format(resultMessageFormat, matchingNumberCount, prize);
     }
 
     public static WinningResult getWinningResultBy(int matchingNumberCount, boolean hasBonusNumber) {
@@ -30,10 +32,6 @@ public enum WinningResult {
                 .filter(winningResult -> winningResult.matchingNumberCount == matchingNumberCount && winningResult.hasBonusNumber() == hasBonusNumber)
                 .findFirst()
                 .orElse(NO_WIN);
-    }
-
-    public boolean hasBonusNumber() {
-        return hasBonusNumber;
     }
 
     public static double calculateRateOfReturn(final int money, final Map<WinningResult, Integer> winningStatistics) {
@@ -44,7 +42,11 @@ public enum WinningResult {
         return (totalReturn / (double) money) * PERCENT;
     }
 
-    public String getResultFormat() {
-        return resultFormat;
+    public boolean hasBonusNumber() {
+        return hasBonusNumber;
+    }
+
+    public String getResultMessageFormat() {
+        return resultMessageFormat;
     }
 }
