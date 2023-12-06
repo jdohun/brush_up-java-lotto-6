@@ -19,11 +19,11 @@ public class WinningLotto {
     }
 
     private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        validateBonusNumberPresent(bonusNumber);
+        validateBonusNumberNotNull(bonusNumber);
         validateNotContainsBonusNumber (winningLotto, bonusNumber);
     }
 
-    private static void validateBonusNumberPresent(LottoNumber bonusNumber) {
+    private static void validateBonusNumberNotNull(LottoNumber bonusNumber) {
         if (null == bonusNumber) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_HAS_NO_BONUS_NUMBER.getMessage());
         }
