@@ -1,6 +1,6 @@
 package lotto.view.outputView;
 
-import lotto.domain.model.WinningResult;
+import lotto.domain.model.winningResult.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.dto.LottoDto;
 
@@ -20,7 +20,7 @@ public final class OutputView {
     public void showLotteriesInfo(Lotteries lotteries) {
         System.out.println();
         showCountOfLotteries(lotteries.getSize());
-        showLotteriesDetail(lotteries.toDtos());
+        showLotteriesDetail(lotteries.toDtoList());
         System.out.println();
     }
 
@@ -39,7 +39,7 @@ public final class OutputView {
         System.out.println(WINNING_STATISTICS_TITLE.getMessage());
         System.out.println(LINE_SEPARATOR_FOR_STATISTICS.getMessage());
         for (Map.Entry<WinningResult, Integer> winningResult : winningResults.entrySet()) {
-            System.out.println(String.format(winningResult.getKey().getResultFormat()) + String.format(COUNT_OF_WINNING_FORMAT.getMessage(), winningResult.getValue()));
+            System.out.println(String.format(winningResult.getKey().getResultMessageFormat()) + String.format(COUNT_OF_WINNING_FORMAT.getMessage(), winningResult.getValue()));
         }
 
     }
