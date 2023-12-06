@@ -1,6 +1,6 @@
 package lotto.domain.model.winningLotto;
 
-import lotto.domain.model.WinningResult;
+import lotto.domain.model.winningResult.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
@@ -18,18 +18,18 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+    private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
         validateBonusNumberPresent(bonusNumber);
         validateNotContainsBonusNumber (winningLotto, bonusNumber);
     }
 
-    private void validateBonusNumberPresent(LottoNumber bonusNumber) {
+    private static void validateBonusNumberPresent(LottoNumber bonusNumber) {
         if (null == bonusNumber) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_HAS_NO_BONUS_NUMBER.getMessage());
         }
     }
 
-    private void validateNotContainsBonusNumber (Lotto winningLotto, LottoNumber bonusNumber) {
+    private static void validateNotContainsBonusNumber (Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_EXISTING_BONUS_NUMBER_IN_LOTTO.getMessage());
         }
