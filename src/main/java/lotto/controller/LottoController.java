@@ -2,7 +2,7 @@ package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.generator.AutoLottoGenerator;
-import lotto.domain.model.WinningResult;
+import lotto.domain.model.winningResult.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
@@ -16,10 +16,10 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class LottoController {
-    private final InputView INPUT_VIEW = InputView.getInstance();
-    private final InputHandler INPUT_HANDLER = InputHandler.getInstance();
-    private final OutputView OUTPUT_VIEW = OutputView.getInstance();
-    private final AutoLottoGenerator LOTTO_GENERATOR = AutoLottoGenerator.getInstance();
+    private static final InputView INPUT_VIEW = InputView.getInstance();
+    private static final InputHandler INPUT_HANDLER = InputHandler.getInstance();
+    private static final OutputView OUTPUT_VIEW = OutputView.getInstance();
+    private static final AutoLottoGenerator LOTTO_GENERATOR = AutoLottoGenerator.getInstance();
 
     public void run() {
         try {
