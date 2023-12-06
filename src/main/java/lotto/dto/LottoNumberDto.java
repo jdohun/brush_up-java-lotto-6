@@ -1,4 +1,4 @@
 package lotto.dto;
 
-public record LottoNumberDto(int number, boolean isBonus) {
+public record LottoNumberDto(int number) {
 }
