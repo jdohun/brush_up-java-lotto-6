@@ -34,10 +34,6 @@ public class LottoNumber {
         validateLottoNumberRange(number);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     private void validateLottoNumberRange(int number) {
         if (START_OF_RANGE > number || END_OF_RANGE < number) {
             throw new IllegalArgumentException(LottoNumberErrorMessage.ERROR_OUT_OF_RANGE.getMessage());
@@ -59,17 +55,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    public static final class Builder {
-        private int lottoNumber;
-        public Builder lottoNumber(int lottoNumber) {
-            this.lottoNumber = lottoNumber;
-            return this;
-        }
-
-        public LottoNumber build() {
-            return new LottoNumber(lottoNumber);
-        }
     }
 }
