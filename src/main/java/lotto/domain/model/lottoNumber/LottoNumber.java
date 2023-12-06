@@ -30,11 +30,11 @@ public class LottoNumber {
         return lottoNumbers;
     }
 
-    private void validate(int number) {
+    private static void validate(int number) {
         validateLottoNumberRange(number);
     }
 
-    private void validateLottoNumberRange(int number) {
+    private static void validateLottoNumberRange(int number) {
         if (START_OF_RANGE > number || END_OF_RANGE < number) {
             throw new IllegalArgumentException(LottoNumberErrorMessage.ERROR_OUT_OF_RANGE.getMessage());
         }

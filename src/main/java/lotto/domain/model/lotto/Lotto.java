@@ -14,18 +14,18 @@ public class Lotto {
         this.numbers = List.copyOf(LottoNumber.from(numbers));
     }
 
-    private void validate(List<Integer> numbers) {
+    private static void validate(List<Integer> numbers) {
         validateSize(numbers);
         hasNoDuplicateNumbers(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private static void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LottoErrorMessage.ERROR_NOT_MATCH_THE_LOTTO_NUMBER_COUNT.getMessage());
         }
     }
 
-    private void hasNoDuplicateNumbers(List<Integer> numbers) {
+    private static void hasNoDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> duplicateNumberChecker = new HashSet<>();
         for (int number : numbers) {
             if (!duplicateNumberChecker.add(number)) {
