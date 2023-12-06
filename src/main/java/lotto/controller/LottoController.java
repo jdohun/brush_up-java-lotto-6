@@ -2,11 +2,11 @@ package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.generator.AutoLottoGenerator;
-import lotto.domain.model.winningResult.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
 import lotto.domain.model.winningLotto.WinningLotto;
+import lotto.domain.model.winningResult.WinningResult;
 import lotto.handler.InputHandler;
 import lotto.view.inputView.InputView;
 import lotto.view.outputView.OutputView;
@@ -62,10 +62,12 @@ public class LottoController {
     }
 
     private <T> T repeatUntilNoException(Supplier<T> supplier) {
-        while (true) try {
-            return supplier.get();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
