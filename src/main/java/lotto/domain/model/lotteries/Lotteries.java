@@ -3,7 +3,6 @@ package lotto.domain.model.lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.dto.LottoDto;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public class Lotteries {
 
     private void validate(List<Lotto> lotteries) {
         validateNotEmpty(lotteries);
-        validateNotNull(lotteries);
+        validateNotNullElements(lotteries);
     }
 
     private void validateNotEmpty(List<Lotto> lotteries) {
@@ -30,7 +29,7 @@ public class Lotteries {
         }
     }
 
-    private void validateNotNull(List<Lotto> lotteries) {
+    private void validateNotNullElements(List<Lotto> lotteries) {
         lotteries.stream().
                 filter(lotto -> null == lotto)
                 .findAny()
@@ -43,7 +42,7 @@ public class Lotteries {
         return lotteries.size();
     }
 
-    public List<LottoDto> toDtos() {
+    public List<LottoDto> toDtoList() {
         return lotteries.stream()
                 .map(Lotto::mapToDto)
                 .collect(Collectors.toList());
