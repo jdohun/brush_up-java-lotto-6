@@ -12,18 +12,10 @@ public class LottoNumber {
     public static final int END_OF_RANGE = 45;
 
     private final int lottoNumber;
-    private final boolean isBonus;
 
     public LottoNumber(int number) {
         validate(number);
         this.lottoNumber = number;
-        this.isBonus = false;
-    }
-
-    public LottoNumber(int number, boolean isBonus) {
-        validate(number);
-        this.lottoNumber = number;
-        this.isBonus = isBonus;
     }
 
     public static List<LottoNumber> from(List<Integer> numbers) {
@@ -52,12 +44,8 @@ public class LottoNumber {
         }
     }
 
-    public boolean isBonus() {
-        return isBonus;
-    }
-
     public LottoNumberDto toDto() {
-        return new LottoNumberDto(lottoNumber, isBonus);
+        return new LottoNumberDto(lottoNumber);
     }
 
     @Override
@@ -75,20 +63,13 @@ public class LottoNumber {
 
     public static final class Builder {
         private int lottoNumber;
-        private boolean isBonus = false;
-
         public Builder lottoNumber(int lottoNumber) {
             this.lottoNumber = lottoNumber;
             return this;
         }
 
-        public Builder isBonus(boolean isBonus) {
-            this.isBonus = isBonus;
-            return this;
-        }
-
         public LottoNumber build() {
-            return new LottoNumber(lottoNumber, isBonus);
+            return new LottoNumber(lottoNumber);
         }
     }
 }

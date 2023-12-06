@@ -20,17 +20,17 @@ public class WinningLotto {
 
     private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
         validateBonusNumberPresent(bonusNumber);
-        validateNotExistingBonusNumber(winningLotto, bonusNumber);
+        validateNotContainsBonusNumber (winningLotto, bonusNumber);
     }
 
     private void validateBonusNumberPresent(LottoNumber bonusNumber) {
-        if (!bonusNumber.isBonus()) {
+        if (null == bonusNumber) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_HAS_NO_BONUS_NUMBER.getMessage());
         }
     }
 
-    private void validateNotExistingBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.hasBonusNumber(bonusNumber)) {
+    private void validateNotContainsBonusNumber (Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_EXISTING_BONUS_NUMBER_IN_LOTTO.getMessage());
         }
     }
@@ -53,7 +53,7 @@ public class WinningLotto {
 
     private WinningResult calculateLottoWinningResult(Lotto lotto) {
         int matchingNumberCount = lotto.countMatchingNumbers(winningLotto);
-        boolean hasBonusNumber = lotto.hasBonusNumber(bonusNumber);
+        boolean hasBonusNumber = lotto.contains(bonusNumber);
 
         return WinningResult.getWinningResultBy(matchingNumberCount, hasBonusNumber);
     }

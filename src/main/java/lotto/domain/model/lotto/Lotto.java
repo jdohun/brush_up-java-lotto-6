@@ -3,10 +3,7 @@ package lotto.domain.model.lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
 import lotto.dto.LottoDto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -43,11 +40,9 @@ public class Lotto {
                 .count();
     }
 
-    public boolean hasBonusNumber(LottoNumber bonusNumber) {
-        if (!bonusNumber.isBonus()) {
-            return false;
-        }
-        return numbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    public boolean contains(LottoNumber lottoNumber) {
+        Objects.requireNonNull(lottoNumber);
+        return numbers.contains(lottoNumber);
     }
 
     public LottoDto mapToDto() {

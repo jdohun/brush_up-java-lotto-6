@@ -58,7 +58,7 @@ public class LottoController {
 
     private LottoNumber announceBonusNumber() {
         int inputBonusNumber = repeatUntilNoException(() -> INPUT_HANDLER.parseBonusNumber(INPUT_VIEW.inputBonusNumber()));
-        return new LottoNumber(inputBonusNumber, true);
+        return new LottoNumber(inputBonusNumber);
     }
 
     private <T> T repeatUntilNoException(Supplier<T> supplier) {
