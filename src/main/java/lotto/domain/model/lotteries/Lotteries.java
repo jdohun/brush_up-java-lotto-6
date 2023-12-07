@@ -6,8 +6,7 @@ import lotto.dto.LottoDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.model.lotteries.LotteriesErrorMessage.ERROR_CONTAIN_NULL_ELEMENT;
-import static lotto.domain.model.lotteries.LotteriesErrorMessage.ERROR_EMPTY_LIST;
+import static lotto.domain.model.lotteries.LotteriesErrorMessage.*;
 
 public class Lotteries {
 
@@ -19,8 +18,15 @@ public class Lotteries {
     }
 
     private void validate(List<Lotto> lotteries) {
+        validateNotNull(lotteries);
         validateNotEmpty(lotteries);
         validateNotNullElements(lotteries);
+    }
+
+    private void validateNotNull(List<Lotto> lotteries) {
+        if (null == lotteries) {
+            throw new IllegalArgumentException(ERROR_NULL.getMessage());
+        }
     }
 
     private void validateNotEmpty(List<Lotto> lotteries) {
@@ -30,12 +36,11 @@ public class Lotteries {
     }
 
     private void validateNotNullElements(List<Lotto> lotteries) {
-        lotteries.stream().
-                filter(lotto -> null == lotto)
-                .findAny()
-                .ifPresent(lotto -> {
-                    throw new IllegalArgumentException(ERROR_CONTAIN_NULL_ELEMENT.getMessage());
-                });
+        for (Lotto lotto : lotteries) {
+            if (null == lotto) {
+                throw new IllegalArgumentException(ERROR_CONTAIN_NULL_ELEMENT.getMessage());
+            }
+        }
     }
 
     public int getSize() {
