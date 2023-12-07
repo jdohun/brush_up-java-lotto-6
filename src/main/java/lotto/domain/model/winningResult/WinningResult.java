@@ -14,6 +14,7 @@ public enum WinningResult {
     FIRST_PLACE(6, false, 2_000_000_000L, RESULT_MATCH_FORMAT.getMessageFormat());
 
     private static final int PERCENT = 100;
+    private static final int JUNCTION_FROM_SECOND_AND_THIRD = 5;
 
     private final int matchingNumberCount;
     private final boolean hasBonusNumber;
@@ -29,7 +30,10 @@ public enum WinningResult {
 
     public static WinningResult getWinningResultBy(int matchingNumberCount, boolean hasBonusNumber) {
         return Arrays.stream(WinningResult.values())
-                .filter(winningResult -> winningResult.matchingNumberCount == matchingNumberCount && winningResult.hasBonusNumber() == hasBonusNumber)
+                .filter(winningResult ->
+                        (JUNCTION_FROM_SECOND_AND_THIRD != matchingNumberCount && winningResult.matchingNumberCount == matchingNumberCount) ||
+                                (winningResult.matchingNumberCount == matchingNumberCount && winningResult.hasBonusNumber() == hasBonusNumber)
+                )
                 .findFirst()
                 .orElse(NO_WIN);
     }
