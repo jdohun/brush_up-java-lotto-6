@@ -9,10 +9,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +41,6 @@ class LottoTest {
     @DisplayName("구현 메소드 테스트")
     @Nested
     class MethodTest {
-
         private static List<List<Integer>> lottoSourceProvider() {
             return Arrays.asList(
                     Arrays.asList(1, 2, 3, 4, 5, 6),
@@ -55,17 +54,12 @@ class LottoTest {
         }
 
         private static Stream<Arguments> matchingNumbersProvider() {
-            List<List<Integer>> lottoSourceProvider = lottoSourceProvider();
-            List<Lotto> generatedLotteries = lottoSourceProvider.stream()
+            List<Lotto> lotteries = lottoSourceProvider().stream()
                     .map(Lotto::new)
                     .collect(Collectors.toList());
 
-            List<Arguments> arguments = new ArrayList<>();
-            for (int i = 0; i < generatedLotteries.size(); i++) {
-                arguments.add(Arguments.of(generatedLotteries.get(i), generatedLotteries.size() - i - 1));
-            }
-
-            return arguments.stream();
+            return IntStream.range(0, lotteries.size())
+                    .mapToObj(i -> Arguments.of(lotteries.get(i), lotteries.size() - i - 1));
         }
 
         @DisplayName("전달받은 LottoNumber 의 보유 여부를 반환한다.")

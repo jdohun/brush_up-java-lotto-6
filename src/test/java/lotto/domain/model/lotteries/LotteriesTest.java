@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.util.ErrorMessagePrefix.ERROR_MESSAGE_PREFIX;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LotteriesTest {
 
@@ -72,11 +74,9 @@ class LotteriesTest {
         void toDtoListTest() {
             // arrange
             List<List<Integer>> lottoSourceProvider = lottoSourceProvider();
-            List<Lotto> lotteries = new ArrayList<>();
-
-            for (List<Integer> numbers : lottoSourceProvider) {
-                lotteries.add(new Lotto(numbers));
-            }
+            List<Lotto> lotteries = lottoSourceProvider.stream()
+                    .map(Lotto::new)
+                    .collect(Collectors.toList());
 
             // act
             List<LottoDto> result = new Lotteries(lotteries).toDtoList();
@@ -90,7 +90,6 @@ class LotteriesTest {
 
                 assertThat(lottoDto.numbers()).containsExactlyInAnyOrderElementsOf(numbers);
             }
-
         }
 
         @DisplayName("내부 정보를 불변 객체로 반환한다.")
@@ -109,6 +108,5 @@ class LotteriesTest {
             assertThatThrownBy(() -> immutableLotteries.remove(1))
                     .isInstanceOf(UnsupportedOperationException.class);
         }
-
     }
 }
