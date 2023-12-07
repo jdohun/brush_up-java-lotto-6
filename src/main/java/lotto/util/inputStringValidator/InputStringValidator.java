@@ -25,7 +25,7 @@ public final class InputStringValidator {
 
     public static void hasNotSurroundingWhiteSpace(String input) {
         Matcher matcher = FORMAT_INVALID_STRING_HAS_SURROUNDING_WHITE_SPACE.matcher(input);
-        if (!matcher.matches()){
+        if (!matcher.matches()) {
             throw new IllegalArgumentException(ERROR_HAS_SURROUNDING_WHITE_SPACE.getMessage());
         }
     }

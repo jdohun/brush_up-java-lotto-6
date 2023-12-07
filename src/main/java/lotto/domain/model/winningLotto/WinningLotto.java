@@ -1,9 +1,9 @@
 package lotto.domain.model.winningLotto;
 
-import lotto.domain.model.winningResult.WinningResult;
 import lotto.domain.model.lotteries.Lotteries;
 import lotto.domain.model.lotto.Lotto;
 import lotto.domain.model.lottoNumber.LottoNumber;
+import lotto.domain.model.winningResult.WinningResult;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ public class WinningLotto {
 
     private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
         validateBonusNumberNotNull(bonusNumber);
-        validateNotContainsBonusNumber (winningLotto, bonusNumber);
+        validateNotContainsBonusNumber(winningLotto, bonusNumber);
     }
 
     private static void validateBonusNumberNotNull(LottoNumber bonusNumber) {
@@ -29,7 +29,7 @@ public class WinningLotto {
         }
     }
 
-    private static void validateNotContainsBonusNumber (Lotto winningLotto, LottoNumber bonusNumber) {
+    private static void validateNotContainsBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(WinningLottoErrorMessage.ERROR_EXISTING_BONUS_NUMBER_IN_LOTTO.getMessage());
         }
