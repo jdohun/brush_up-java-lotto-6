@@ -27,24 +27,10 @@ public final class InputHandler {
         return money;
     }
 
-    private void validateInput(String input) {
-        InputStringValidator.isNotNull(input);
-        InputStringValidator.isNotEmpty(input);
-        InputStringValidator.hasNotSurroundingWhiteSpace(input);
-    }
-
     private void validateMoneyDivisibleByLottoPrice(final int money) {
         if (money % AutoLottoGenerator.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_DIVISIBLE_BY_LOTTO_PRICE.getMessage());
         }
-    }
-
-    private int parseInputAsInteger(String input) {
-        Matcher matcher = INTEGER_PATTERN.matcher(input);
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_INTEGER.getMessage());
-        }
-        return Integer.parseInt(input);
     }
 
     public List<Integer> parseWinningNumbers(String inputWinningNumbers) {
@@ -62,7 +48,7 @@ public final class InputHandler {
 
     private void validateWinningNumbersFormat(String inputWinningNumbers) {
         Matcher matcher = WINNING_NUMBER_PATTERN.matcher(inputWinningNumbers);
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
             throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_INVALID_WINNING_NUMBERS_FORMAT.getMessage());
         }
     }
@@ -72,7 +58,22 @@ public final class InputHandler {
         return parseInputAsInteger(inputBonusNumber);
     }
 
+    private void validateInput(String input) {
+        InputStringValidator.isNotNull(input);
+        InputStringValidator.isNotEmpty(input);
+        InputStringValidator.hasNotSurroundingWhiteSpace(input);
+    }
+
+    private int parseInputAsInteger(String input) {
+        Matcher matcher = INTEGER_PATTERN.matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(InputHandlerErrorMessage.ERROR_NOT_INTEGER.getMessage());
+        }
+        return Integer.parseInt(input);
+    }
+
     private static final class Holder {
+
         private static final InputHandler INPUT_HANDLER = new InputHandler();
     }
 }
