@@ -34,15 +34,15 @@ public class Lotto {
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        Objects.requireNonNull(lottoNumber);
+        return numbers.contains(lottoNumber);
+    }
+
     public int countMatchingNumbers(Lotto lotto) {
         return (int) lotto.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        Objects.requireNonNull(lottoNumber);
-        return numbers.contains(lottoNumber);
     }
 
     public LottoDto mapToDto() {
@@ -51,5 +51,10 @@ public class Lotto {
             numbersForDto.add(number.toDto().number());
         }
         return new LottoDto(numbersForDto);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" + numbers + '}';
     }
 }
