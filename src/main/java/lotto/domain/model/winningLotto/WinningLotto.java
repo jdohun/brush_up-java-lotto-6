@@ -59,6 +59,9 @@ public class WinningLotto {
     }
 
     private Map<WinningResult, Integer> initializeWinningStatistics() {
+        /**
+         * 순서에 의존적이기 때문에 foreach 문 사용
+         * */
         Map<WinningResult, Integer> winningResultIntegerMap = new HashMap<>();
         for (WinningResult result : EnumSet.range(WinningResult.FIFTH_PLACE, WinningResult.FIRST_PLACE)) {
             winningResultIntegerMap.put(result, 0);
