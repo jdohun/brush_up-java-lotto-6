@@ -53,6 +53,7 @@
     - [x] 구입금액과 계산된 당첨 통계를 통해 수익률을 계산한다.
     - [x] 필요 보너스 번호의 일치 여부를 반환한다.
     - [x] 당첨 결과 메시지 형식을 반환한다.
+    - [x] 구입 금액과 당첨 통계를 토대로 수익률을 계산한다.
 
 - ### WinningLotto
   - 멤버
@@ -69,6 +70,7 @@
       - [x] 전달받은 `Lotteries` 의 각 `Lotto` 의 당첨 결과 List 를 반환한다.
         - [x] 전달받은 `Lotto` 의 당첨 결과를 반환한다.
       - [x] 당첨 결과 List 를 통해 초기화한 당첨 통계를 업데이트한다.
+    - [x] `Lotteries` 를 `WinningLotto` 와 비교하여 당첨 통계를 계산한다.
 
 ### generator
 - ### AutoLottoGenerator
@@ -134,10 +136,8 @@
     - [x] 보너스 번호를 입력 받는다.
       - [x] 잘못된 입력이 존재할 경우 예외 처리하고 재입력 받는다.
       - [x] 입력된 보너스 번호를 통해 `LottoNumber` 생성 시 예외가 발생하면 예외 처리하고 재입력 받는다.
-  - [x] 생성된 `Lotto` 와 `LottoNumber` 를 통해 `WinningLotto` 생성 시 예외가 발생하면 예외 처리하고 재입력 받는다.
 
-- [x] `Lotteries` 를 `WinningLotto` 와 비교하여 당첨 통계를 계산한다.
-- [x] 구입 금액과 당첨 통계를 토대로 수익률을 계산한다.
+  - [x] 생성된 `Lotto` 와 `LottoNumber` 를 통해 `WinningLotto` 생성 시 예외가 발생하면 예외 처리하고 재입력 받는다.
 
 ### UI (View)
 - ### InputView
