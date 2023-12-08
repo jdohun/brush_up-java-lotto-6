@@ -102,7 +102,7 @@ class LotteriesTest {
             List<Lotto> immutableLotteries = lotteries.getImmutableLotteries();
 
             // assert
-            assertThatThrownBy(() -> immutableLotteries.add(new Lotto(Arrays.asList(1,2,3,4,5,6))))
+            assertThatThrownBy(() -> immutableLotteries.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
                     .isInstanceOf(UnsupportedOperationException.class);
 
             assertThatThrownBy(() -> immutableLotteries.remove(1))
