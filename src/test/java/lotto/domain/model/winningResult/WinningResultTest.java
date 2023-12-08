@@ -5,7 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningResultTest {
 
@@ -17,10 +23,28 @@ class WinningResultTest {
         WinningResult result = WinningResult.getWinningResultBy(matchingNumberCount, hasBonusNumber);
 
         // assert
-        assertEquals(result, expected);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @DisplayName("구입 금액과 통계 결과를 통해 수익률을 게산한다.")
     @Test
     void calculateRateOfReturn() {
+        // arrange
+        String expected = "62.5";
+        int money = 8000;
+        WinningResult updateResult = WinningResult.FIFTH_PLACE;
+        String outputFormat = "%.1f";
+
+        Map<WinningResult, Integer> winningResultIntegerMap = EnumSet.range(WinningResult.FIFTH_PLACE, WinningResult.FIRST_PLACE).stream()
+                        .collect(Collectors.toMap(winningResult -> winningResult, value -> 0));
+
+        winningResultIntegerMap.merge(updateResult, 1, Integer::sum);
+
+        // act
+        double rateOfReturn = WinningResult.calculateRateOfReturn(money, winningResultIntegerMap);
+        String result = String.format(outputFormat, rateOfReturn);
+
+        // assert
+        assertThat(result).isEqualTo(expected);
     }
 }
