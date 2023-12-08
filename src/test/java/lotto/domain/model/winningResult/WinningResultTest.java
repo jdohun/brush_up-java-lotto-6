@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,7 +34,7 @@ class WinningResultTest {
         String outputFormat = "%.1f";
 
         Map<WinningResult, Integer> winningResultIntegerMap = EnumSet.range(WinningResult.FIFTH_PLACE, WinningResult.FIRST_PLACE).stream()
-                        .collect(Collectors.toMap(winningResult -> winningResult, value -> 0));
+                .collect(Collectors.toMap(winningResult -> winningResult, value -> 0));
 
         winningResultIntegerMap.merge(updateResult, 1, Integer::sum);
 
